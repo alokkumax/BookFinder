@@ -147,7 +147,7 @@ class _bookState extends State<books> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SearchPage()),
+                      MaterialPageRoute(builder: (context) => SearchPage(),),
                     );
                   },child: Icon(Icons.search,color: Color(0xff7f00ff),size: 30,)),
             )
