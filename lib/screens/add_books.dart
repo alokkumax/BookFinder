@@ -44,6 +44,7 @@ class _addState extends State<add> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title:Row(
@@ -59,115 +60,127 @@ class _addState extends State<add> {
         // ],
       ),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 10,),
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Column(
 
-            SizedBox(height: 8,),
-            Container(
-              margin:EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextFormField(
-                      controller: _titleController,
-                      decoration:
-                      InputDecoration(
-                        border: InputBorder.none,
-                          fillColor: Color(0xffE2D3F5),
-                          hintText: "Title of the Book",
-                          prefixIcon: Icon(Icons.book,size: 30,color: Color(0xff6F35A4),),
-                          filled: true
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                margin:EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: size.height /2.5,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(
+                              'images/books.png'),
+
+                        ),
+                        shape: BoxShape.circle,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextFormField(
-                      controller: _authorController,
-                      decoration:
-                      InputDecoration(
+
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        controller: _titleController,
+                        decoration:
+                        InputDecoration(
                           border: InputBorder.none,
-                          fillColor: Color(0xffE2D3F5),
-                          hintText: "Author Name",
-                          prefixIcon: Icon(Icons.person,size: 30,color: Color(0xff6F35A4),),
-                          filled: true
+                            fillColor: Color(0xffE2D3F5),
+                            hintText: "Title of the Book",hintStyle: TextStyle(color: Color(0xff9417e2),),
+                            prefixIcon: Icon(Icons.book,size: 30,color: Color(0xff6F35A4),),
+                            filled: true
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextFormField(
-                      controller: _desController,
-                      decoration:
-                      InputDecoration(
-                          border: InputBorder.none,
-                          fillColor: Color(0xffE2D3F5),
-                          hintText: "Short Description",
-                          prefixIcon: Icon(Icons.description,size: 30,color: Color(0xff6F35A4),),
-                          filled: true
+                    SizedBox(height: 10,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        controller: _authorController,
+                        decoration:
+                        InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Color(0xffE2D3F5),
+                            hintText: "Author Name",hintStyle: TextStyle(color: Color(0xff9417e2),),
+                            prefixIcon: Icon(Icons.person,size: 30,color: Color(0xff6F35A4),),
+                            filled: true
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: TextFormField(
-                      controller: _dateController,
-                      decoration:
-                      InputDecoration(
-                          border: InputBorder.none,
-                          fillColor: Color(0xffE2D3F5),
-                          hintText: "Publish Date of Book",
-                          prefixIcon: Icon(Icons.date_range,size: 30,color: Color(0xff6F35A4),),
-                          filled: true
+                    SizedBox(height: 10,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        controller: _desController,
+                        decoration:
+                        InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Color(0xffE2D3F5),
+                            hintText: "Short Description",hintStyle: TextStyle(color: Color(0xff9417e2),),
+                            prefixIcon: Icon(Icons.description,size: 30,color: Color(0xff6F35A4),),
+                            filled: true
+                        ),
                       ),
                     ),
-                  ),
-                  ],
+                    SizedBox(height: 10,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: TextFormField(
+                        controller: _dateController,
+                        decoration:
+                        InputDecoration(
+                            border: InputBorder.none,
+                            fillColor: Color(0xffE2D3F5),
+                            hintText: "Publish Date of Book",hintStyle: TextStyle(color: Color(0xff9417e2),),
+                            prefixIcon: Icon(Icons.date_range,size: 30,color: Color(0xff6F35A4),),
+                            filled: true
+                        ),
+                      ),
+                    ),
+                    ],
+                ),
               ),
-            ),
-            SizedBox(height: 25,),
-          Row(
+              SizedBox(height: 25,),
+            Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        GestureDetector(
-          // onTap: _pickDate,
+          GestureDetector(
+            // onTap: _pickDate,
+            child: Container(
+              height: 45,
+              width: 65,
+              padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.red,),
+              child: Icon(Icons.delete,color: Colors.white,),
+            ),
+          ),
+          SizedBox(
+            width: 15,
+          ),
+      GestureDetector(
+          onTap: saveBook,
           child: Container(
             height: 45,
-            width: 65,
-            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red,),
-            child: Icon(Icons.delete,color: Colors.white,),
+          width: 120,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [Color(0xff8F7AFE), Color(0xffD76EF5),]),
+              borderRadius: BorderRadius.circular(10)),
+          child: Center(
+            child: Text(
+              'Save',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600,fontSize: 18),
+            ),
           ),
-        ),
-        SizedBox(
-          width: 15,
-        ),
-      GestureDetector(
-        onTap: saveBook,
-        child: Container(
-          height: 45,
-        width: 120,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.bottomLeft,
-                end: Alignment.topRight,
-                colors: [Color(0xff8F7AFE), Color(0xffD76EF5),]),
-            borderRadius: BorderRadius.circular(10)),
-        child: Center(
-          child: Text(
-            'Save',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600,fontSize: 18),
-          ),
-        ),
     ),
       ),
 
@@ -175,6 +188,7 @@ class _addState extends State<add> {
     ],
     )
        ]
+          ),
         ),
       ),
 

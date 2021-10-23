@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'BookFinder',
       theme: ThemeData(
-        primaryColor: Color(0xffF4F4F4)
+        primaryColor: Colors.white
       ),
       // theme: ThemeData(
       //   primaryColor: Colors.deepPurple,
@@ -36,6 +36,7 @@ class HelloWorld extends StatelessWidget {
     return Scaffold(
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/bg.png"),
@@ -45,16 +46,17 @@ class HelloWorld extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Image.asset("images/book.png",fit: BoxFit.fitWidth,height: 290,),
             RichText(
               text: TextSpan(
 
                 children: [
                   TextSpan(
-                    text: "book",style: GoogleFonts.inter(color: Color(0xff8F7AFE),fontSize: 30)
+                    text: "book",style: GoogleFonts.inter(color: Color(0xff8F7AFE),fontSize: 30,fontWeight: FontWeight.w500)
                   ),
                   TextSpan(
                     text: "FINDER",
-                    style:GoogleFonts.inter(color:Color(0xffD76EF5),fontSize: 30,fontWeight: FontWeight.w500),
+                    style:GoogleFonts.inter(color:Color(0xffD76EF5),fontSize: 30,fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
