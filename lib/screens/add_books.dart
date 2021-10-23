@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:random_string/random_string.dart';
 class add extends StatefulWidget {
@@ -15,8 +17,9 @@ class _addState extends State<add> {
   TextEditingController _titleController, _authorController, _dateController, _desController;
   DatabaseReference _ref;
   File image;
+  DateTime pickedDate;
 
-
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
 
@@ -28,9 +31,14 @@ class _addState extends State<add> {
     _authorController = TextEditingController();
     _dateController = TextEditingController();
     _desController = TextEditingController();
+
+    pickedDate = DateTime.now();
+
     _ref = FirebaseDatabase.instance.reference().child('Books');
 
+
   }
+
 
 
 
@@ -39,14 +47,16 @@ class _addState extends State<add> {
     return Scaffold(
       appBar: AppBar(
         title:Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
-            Center(child: Text('Publish Your Book')),
+            Text('      Publish Your Book',style: GoogleFonts.inter(fontWeight: FontWeight.w500,color: Color(0xff7f00ff)),),
           ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-
+        // actions: [
+        //   Icon(Icons.add,color: Colors.white,)
+        // ],
       ),
       body: Container(
         child: Column(
@@ -59,70 +69,120 @@ class _addState extends State<add> {
               margin:EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: <Widget>[
-                  TextFormField(
-                    controller: _titleController,
-                    decoration:
-                    InputDecoration(
-                        hintText: "Title of the Book",
-                        prefixIcon: Icon(Icons.drive_file_rename_outline,size: 30,color: Colors.white,),
-                        filled: true
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: _titleController,
+                      decoration:
+                      InputDecoration(
+                        border: InputBorder.none,
+                          fillColor: Color(0xffE2D3F5),
+                          hintText: "Title of the Book",
+                          prefixIcon: Icon(Icons.book,size: 30,color: Color(0xff6F35A4),),
+                          filled: true
+                      ),
                     ),
                   ),
                   SizedBox(height: 10,),
-                  TextFormField(
-                    controller: _authorController,
-                    decoration:
-                    InputDecoration(
-                        hintText: "Author Name",
-                        prefixIcon: Icon(Icons.person,size: 30,color: Colors.white,),
-                        filled: true
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: _authorController,
+                      decoration:
+                      InputDecoration(
+                          border: InputBorder.none,
+                          fillColor: Color(0xffE2D3F5),
+                          hintText: "Author Name",
+                          prefixIcon: Icon(Icons.person,size: 30,color: Color(0xff6F35A4),),
+                          filled: true
+                      ),
                     ),
                   ),
                   SizedBox(height: 10,),
-                  TextFormField(
-                    controller: _desController,
-                    decoration:
-                    InputDecoration(
-                        hintText: "Short Description",
-                        prefixIcon: Icon(Icons.person,size: 30,color: Colors.white,),
-                        filled: true
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: _desController,
+                      decoration:
+                      InputDecoration(
+                          border: InputBorder.none,
+                          fillColor: Color(0xffE2D3F5),
+                          hintText: "Short Description",
+                          prefixIcon: Icon(Icons.description,size: 30,color: Color(0xff6F35A4),),
+                          filled: true
+                      ),
                     ),
                   ),
                   SizedBox(height: 10,),
-                  TextFormField(
-                    controller: _dateController,
-                    decoration:
-                    InputDecoration(
-                        hintText: "date",
-                        prefixIcon: Icon(Icons.calendar_today,size: 30,color: Colors.white,),
-                        filled: true
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TextFormField(
+                      controller: _dateController,
+                      decoration:
+                      InputDecoration(
+                          border: InputBorder.none,
+                          fillColor: Color(0xffE2D3F5),
+                          hintText: "Publish Date of Book",
+                          prefixIcon: Icon(Icons.date_range,size: 30,color: Color(0xff6F35A4),),
+                          filled: true
+                      ),
                     ),
                   ),
-
-                ],
+                  ],
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(height: 25,),
+          Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        GestureDetector(
+          // onTap: _pickDate,
+          child: Container(
+            height: 45,
+            width: 65,
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red,),
+            child: Icon(Icons.delete,color: Colors.white,),
+          ),
+        ),
+        SizedBox(
+          width: 15,
+        ),
+      GestureDetector(
+        onTap: saveBook,
+        child: Container(
+          height: 45,
+        width: 120,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [Color(0xff8F7AFE), Color(0xffD76EF5),]),
+            borderRadius: BorderRadius.circular(10)),
+        child: Center(
+          child: Text(
+            'Save',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600,fontSize: 18),
+          ),
+        ),
+    ),
+      ),
 
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: RaisedButton(
-                child: Text("save",style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),),
-                onPressed: (){
-                  saveBook();
-                },
-                color: Theme.of(context).primaryColor,
-              ),
-            )
-          ],
+
+    ],
+    )
+       ]
         ),
       ),
+
     );
+
   }
+
+
   void saveBook(){
     String title = _titleController.text;
     String author = _authorController.text;
@@ -134,8 +194,19 @@ class _addState extends State<add> {
       'author': author,
       'date': date,
       'des': des,
+
     };
     _ref.push().set(book).then((value) =>
     Navigator.pop(context));
   }
+  _pickDate() async{
+   DateTime date = await  showDatePicker(context: context, firstDate: DateTime(DateTime.now().year-20),
+        lastDate: DateTime(DateTime.now().year+20),initialDate: pickedDate);
+   if(date != null)
+     setState(() {
+       pickedDate=date;
+     });
+
+  }
+
 }
