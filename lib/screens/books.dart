@@ -1,4 +1,5 @@
 
+import 'package:challenge/UI/cate.dart';
 import 'package:challenge/UI/logo.dart';
 import 'package:challenge/screens/add_books.dart';
 import '../UI/like.dart';
@@ -115,10 +116,9 @@ class _bookState extends State<books> {
                 size: 20,),
             ),
             SizedBox(width: 0,),
-
-            Text(book['author'],style:GoogleFonts.inter(fontWeight: FontWeight.w400,color: Colors.white,fontSize: 18) ),
+            Text(book['author'],style:GoogleFonts.inter(fontWeight: FontWeight.w400,color: Colors.white,fontSize: 16) ),
             SizedBox(width: 10,),
-            Text(book['date'],style:GoogleFonts.inter(fontWeight: FontWeight.w400,color: Colors.white,fontSize: 12) ),
+            Text(book['date'],style:GoogleFonts.inter(fontWeight: FontWeight.w400,color: Colors.white,fontSize: 10) ),
             SizedBox(width: 60,),
             Like(),
 
@@ -144,28 +144,36 @@ class _bookState extends State<books> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child:GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SearchPage(),),
-                    );
-                  },child: Icon(Icons.search,color: Color(0xff7f00ff),size: 30,)),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => HomeScreen()),
+                  );
+                },
+                  child: Icon(Icons.category,color: Color(0xff7f00ff),size: 30,)),
             )
           ],
         ),
 
-        body: Container(
-          height: double.infinity,
-          child: FirebaseAnimatedList(
-            query: _ref,
-            itemBuilder:(BuildContext context,
-                DataSnapshot snapshot,
-                Animation<double>animation,
-                int index){
-              Map name = snapshot.value;
-              name['key'] = snapshot.key;
-              return _buildBookItem(book: name);
-            },),
+        body: Stack(
+          children: <Widget>[
+
+            SizedBox(height: 50,),
+            Positioned(
+
+              child: FirebaseAnimatedList(
+                query: _ref,
+                itemBuilder:(BuildContext context,
+                    DataSnapshot snapshot,
+                    Animation<double>animation,
+                    int index){
+                  Map name = snapshot.value;
+                  name['key'] = snapshot.key;
+                  return _buildBookItem(book: name);
+                },),
+            ),
+          ],
         ),
         floatingActionButton:Container(
           padding: EdgeInsets.symmetric(vertical: 20),

@@ -149,7 +149,7 @@ class _addState extends State<add> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
           GestureDetector(
-            // onTap: _pickDate,
+            onTap: (){Navigator.pop(context);},
             child: Container(
               height: 45,
               width: 65,
@@ -157,7 +157,7 @@ class _addState extends State<add> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.red,),
-              child: Icon(Icons.delete,color: Colors.white,),
+              child: Icon(Icons.close_sharp,color: Colors.white,),
             ),
           ),
           SizedBox(
