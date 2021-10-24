@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "430728221307",
+    "project_id": "bookfinder-c24b3",
+    "storage_bucket": "bookfinder-c24b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430728221307:android:e5d870daf9216b5ec488de",
+        "android_client_info": {
+          "package_name": "kumax.challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430728221307-6f77ml6p93eb9ne0vebv5m4r1os7j75g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzxdv4vVeswMeoVhOWx1qDlaagtDyerQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430728221307-6f77ml6p93eb9ne0vebv5m4r1os7j75g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
