@@ -5,6 +5,11 @@
 # BookFinder App
 This is an Android App to find and add Books
 
+
+## Key Points
+1. User can Store their Book Information using Firebase Database
+2. Clean and Simple User Interface
+3. Categarized Books for users (cate. sections books are to arranged via Firebase Database or Codebase for now)
 ---
 
 ## Installation
@@ -32,10 +37,6 @@ git clone https://github.com/<your-username>/BookFinder.git
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/59159355/138596907-8513c77d-5c4e-4391-aadf-a78f489c9aee.png">
 
-## Key Points
-1. Stores Book Information using Firebase Database
-2. Clean user interface and easy readability
-3. Categarized Books for users
 
 ---
 
